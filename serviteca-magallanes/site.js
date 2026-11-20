@@ -27,13 +27,13 @@ form.addEventListener('submit', (event) => {
   event.preventDefault()
   const vehicleName = vehicle.value.trim()
   if (!vehicleName) {
-    vehicle.setCustomValidity('Escribe la marca y el modelo de tu auto.')
+    vehicle.setCustomValidity('Escribe la marca, el modelo y, si lo conoces, el año de tu auto.')
     vehicle.reportValidity()
     return
   }
 
   const lines = [
-    'Hola, Serviteca Magallanes. Quisiera consultar por mi vehículo.',
+    'Hola, Serviteca Magallanes. Quisiera consultar por un servicio para mi auto.',
     '',
     'Vehículo · ' + vehicleName,
     'Motivo · ' + service.selectedOptions[0].textContent,
@@ -44,7 +44,7 @@ form.addEventListener('submit', (event) => {
   if (notes.value.trim()) {
     lines.push('Detalles · ' + notes.value.trim())
   }
-  lines.push('', '¿Podrían indicarme si pueden realizar la revisión? Gracias.')
+  lines.push('', '¿Podrían indicarme cuánto cuesta y qué disponibilidad tienen? Gracias.')
 
   message.value = lines.join('\n')
   whatsapp.href = 'https://wa.me/56961412094?text=' + encodeURIComponent(message.value)

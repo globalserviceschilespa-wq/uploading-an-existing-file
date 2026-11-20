@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#121517">
-  <meta name="description" content="Serviteca Magallanes. Conoce los motivos de consulta de mantenimiento automotriz y prepara los datos de tu vehículo para una revisión.">
-  <title>Serviteca Magallanes | Mantenimiento automotriz</title>
+  <meta name="description" content="Taller mecánico en La Granja, Santiago. Cambio de aceite, frenos, pastillas, tren delantero, alineación y mantención por kilometraje. Cotiza por WhatsApp.">
+  <title>Serviteca Magallanes | Taller mecánico en La Granja</title>
   <link rel="icon" href="assets/mark.png" type="image/png">
   <link rel="preload" href="assets/barlow-condensed-bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
@@ -22,8 +22,8 @@
       </a>
       <nav class="site-nav" aria-label="Navegación principal">
         <a href="#servicios">Servicios</a>
-        <a href="#solicitud">Ubicación y horario</a>
-        <a class="button button-outline" href="#solicitud">Consultar al taller</a>
+        <a href="#contacto">Ubicación y horario</a>
+        <a class="button button-outline" href="#cotizar">Cotizar servicio</a>
       </nav>
     </div>
   </header>
@@ -31,43 +31,69 @@
     <section class="hero" aria-labelledby="titulo">
       <img class="hero-photo" src="assets/taller-hero.webp" alt="" fetchpriority="high">
       <div class="wrap hero-content">
-        <p class="eyebrow">Mantenimiento automotriz</p>
-        <h1 id="titulo">Cuida tu auto.<br>Disfruta la ruta.</h1>
-        <p class="hero-description">Desde la mantención por kilometraje hasta esa vibración que apareció al manejar. Encuentra por dónde empezar con Serviteca Magallanes.</p>
+        <p class="eyebrow">Serviteca Magallanes</p>
+        <h1 id="titulo">Taller mecánico<br>en La Granja</h1>
+        <p class="hero-description">Cambio de aceite, frenos y tren delantero. Elige el servicio que necesitas y consulta precio y disponibilidad por WhatsApp.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="https://wa.me/56961412094" target="_blank" rel="noopener noreferrer">Consultar por WhatsApp</a>
-          <a class="button button-outline" href="#servicios">Ver servicios</a>
+          <a class="button button-primary" href="#servicios">Elegir un servicio</a>
+          <a class="button button-outline" href="https://wa.me/56961412094" target="_blank" rel="noopener noreferrer">WhatsApp directo</a>
         </div>
       </div>
     </section>
 
+    <nav class="service-shortcuts" aria-label="Accesos a servicios del taller">
+      <div class="wrap shortcut-links">
+        <a href="#aceite">Cambio de aceite</a>
+        <a href="#frenos">Revisión de frenos</a>
+        <a href="#tren-delantero">Tren delantero</a>
+        <a href="#alineacion">Alineación y balanceo</a>
+      </div>
+    </nav>
+
     <section class="section section-services" id="servicios" aria-labelledby="servicios-titulo">
       <div class="wrap">
         <div class="section-intro">
-          <h2 id="servicios-titulo">¿Qué quieres<br>revisar en tu auto?</h2>
-          <p>Elige el servicio que necesitas. Si tienes dudas, cuéntanos qué has notado y en qué condiciones aparece.</p>
+          <h2 id="servicios-titulo">Servicios para tu auto</h2>
+          <p>Elige un servicio para preparar tu cotización. Si no sabes qué necesita tu auto, también puedes describir el problema.</p>
         </div>
         <div class="service-grid">
-          <article class="service-card">
-            <h3>Mantención preventiva</h3>
-            <p>Revisión de los puntos de mantenimiento que correspondan al kilometraje y al modelo de tu vehículo.</p>
-            <a href="#solicitud" data-service="preventivo">Consultar mantención</a>
+          <article class="service-card" id="aceite">
+            <h3>Cambio de aceite y filtro</h3>
+            <p>Consulta por el recambio según el tipo de motor, el kilometraje y las especificaciones de tu auto.</p>
+            <a href="#cotizar" data-service="aceite">Cotizar cambio de aceite</a>
           </article>
-          <article class="service-card">
+          <article class="service-card" id="frenos">
+            <h3>Revisión de frenos</h3>
+            <p>Para ruidos, vibraciones o cambios al pisar el pedal. Consulta qué revisión corresponde a tu vehículo.</p>
+            <a href="#cotizar" data-service="frenos">Consultar por frenos</a>
+          </article>
+          <article class="service-card" id="tren-delantero">
+            <h3>Tren delantero</h3>
+            <p>Consulta por dirección y suspensión si escuchas golpes al pasar por baches o notas juego en el volante.</p>
+            <a href="#cotizar" data-service="tren-delantero">Consultar por tren delantero</a>
+          </article>
+          <article class="service-card" id="pastillas">
+            <h3>Cambio de pastillas</h3>
+            <p>Indica marca, modelo y año. Si sabes si son delanteras o traseras, inclúyelo en la consulta.</p>
+            <a href="#cotizar" data-service="pastillas">Cotizar pastillas de freno</a>
+          </article>
+          <article class="service-card" id="alineacion">
             <h3>Alineación y balanceo</h3>
-            <p>Revisión para autos que vibran al andar, se desvían o presentan desgaste irregular en los neumáticos.</p>
-            <a href="#solicitud" data-service="alineacion">Consultar alineación</a>
+            <p>Consulta si el auto se desvía, el volante vibra al andar o ves desgaste irregular en los neumáticos.</p>
+            <a href="#cotizar" data-service="alineacion">Cotizar alineación y balanceo</a>
           </article>
-          <article class="service-card">
-            <h3>Frenos</h3>
-            <p>Revisión del sistema de frenos si notas ruidos, vibraciones o cambios en la respuesta del pedal.</p>
-            <a href="#solicitud" data-service="frenos">Consultar por frenos</a>
+          <article class="service-card" id="mantencion">
+            <h3>Mantención por kilometraje</h3>
+            <p>Indica el kilometraje actual y la última mantención para consultar qué corresponde revisar.</p>
+            <a href="#cotizar" data-service="preventivo">Cotizar mantención</a>
           </article>
-          <article class="service-card">
-            <h3>Lubricentro</h3>
-            <p>Cambio de aceite y filtros según las especificaciones y el intervalo de mantención de tu auto.</p>
-            <a href="#solicitud" data-service="lubricentro">Consultar cambio de aceite</a>
-          </article>
+        </div>
+        <div class="service-help">
+          <div>
+            <h3>¿No sabes qué necesita tu auto?</h3>
+            <p>Cuéntanos qué ocurre y cuándo lo notas.</p>
+          </div>
+          <a class="button" href="#cotizar" data-service="revision">Describir el problema</a>
         </div>
       </div>
     </section>
@@ -90,26 +116,26 @@
       </div>
     </section>
 
-    <section class="section section-request" id="solicitud" aria-labelledby="solicitud-titulo">
+    <section class="section section-request" aria-label="Cotización y ubicación del taller">
       <div class="wrap request-grid">
-        <div class="request-intro">
-          <h2 id="solicitud-titulo">Visita el taller</h2>
-          <address>
-            <strong>Casa matriz · La Granja</strong>
-            <span>Av. Santa Rosa 6794, La Granja, Santiago</span>
-            <a href="https://wa.me/56961412094" target="_blank" rel="noopener noreferrer">+56 9 6141 2094</a>
-          </address>
-          <dl class="hours">
-            <div><dt>Lunes a viernes</dt><dd>09:00 a 19:00</dd></div>
-            <div><dt>Sábado</dt><dd>09:00 a 14:00</dd></div>
-          </dl>
-          <a class="button button-outline" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Santa+Rosa+6794%2C+La+Granja%2C+Santiago%2C+Chile" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
-        </div>
-        <div class="request-panel">
-          <h3>Prepara tu consulta</h3>
-          <p>Completa los datos de tu auto y abre WhatsApp con el mensaje listo para revisar y enviar.</p>
+        <div class="request-panel" id="cotizar" tabindex="-1">
+          <h2 class="panel-title">Cotiza tu servicio</h2>
+          <p>Elige el trabajo y completa los datos de tu auto. Revisa el mensaje y envíalo por WhatsApp para consultar precio y disponibilidad.</p>
           <noscript><p>También puedes <a href="https://wa.me/56961412094">escribir al taller por WhatsApp</a>.</p></noscript>
           <form id="request-form" hidden>
+            <div class="field">
+              <label for="service">Servicio</label>
+              <select id="service" name="service" required>
+                <option value="">Selecciona un servicio</option>
+                <option value="aceite">Cambio de aceite y filtro</option>
+                <option value="frenos">Revisión de frenos</option>
+                <option value="tren-delantero">Tren delantero</option>
+                <option value="pastillas">Cambio de pastillas</option>
+                <option value="alineacion">Alineación y balanceo</option>
+                <option value="preventivo">Mantención por kilometraje</option>
+                <option value="revision">Quiero describir el problema</option>
+              </select>
+            </div>
             <div class="field-row">
               <div class="field">
                 <label for="vehicle">Marca y modelo</label>
@@ -121,21 +147,10 @@
               </div>
             </div>
             <div class="field">
-              <label for="service">Motivo de consulta</label>
-              <select id="service" name="service" required>
-                <option value="">Selecciona un motivo</option>
-                <option value="preventivo">Mantención preventiva</option>
-                <option value="alineacion">Alineación y balanceo</option>
-                <option value="frenos">Frenos</option>
-                <option value="lubricentro">Lubricentro</option>
-                <option value="revision">Otra consulta</option>
-              </select>
-            </div>
-            <div class="field">
               <label for="notes">¿Qué has notado? <span>(opcional)</span></label>
               <textarea id="notes" name="notes" rows="3" maxlength="800" placeholder="Ej. Siento una vibración en el volante al frenar."></textarea>
             </div>
-            <button class="button button-primary" type="submit">Crear mensaje</button>
+            <button class="button button-primary" type="submit">Preparar mensaje</button>
           </form>
           <div class="request-result" id="request-result" hidden>
             <h3 id="result-title" tabindex="-1">Tu mensaje está listo</h3>
@@ -147,6 +162,19 @@
             </div>
             <p id="result-status" class="result-status" role="status"></p>
           </div>
+        </div>
+        <div class="request-intro" id="contacto">
+          <h2>Visita el taller</h2>
+          <address>
+            <strong>Casa matriz · La Granja</strong>
+            <span>Av. Santa Rosa 6794, La Granja, Santiago</span>
+            <a href="https://wa.me/56961412094" target="_blank" rel="noopener noreferrer">+56 9 6141 2094</a>
+          </address>
+          <dl class="hours">
+            <div><dt>Lunes a viernes</dt><dd>09:00 a 19:00</dd></div>
+            <div><dt>Sábado</dt><dd>09:00 a 14:00</dd></div>
+          </dl>
+          <a class="button button-outline" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Santa+Rosa+6794%2C+La+Granja%2C+Santiago%2C+Chile" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
         </div>
       </div>
     </section>
@@ -160,5 +188,9 @@
       <p>Serviteca Magallanes · Mantenimiento automotriz</p>
     </div>
   </footer>
+  <nav class="mobile-actions" aria-label="Contacto rápido">
+    <a class="button button-outline" href="#contacto">Ubicación</a>
+    <a class="button button-primary" href="https://wa.me/56961412094" target="_blank" rel="noopener noreferrer">WhatsApp directo</a>
+  </nav>
 </body>
 </html>

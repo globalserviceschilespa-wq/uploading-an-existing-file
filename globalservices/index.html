@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101923">
   <meta name="robots" content="noindex">
-  <meta name="description" content="Globalservices. Electricidad industrial, automatización y mantenimiento eléctrico para tus proyectos y equipos.">
+  <meta name="description" content="Globalservices. Electricidad industrial, automatización, mantenimiento, cámaras para faenas remotas y apoyo en trámites eléctricos ante la SEC.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Globalservices | Electricidad y automatización industrial">
-  <meta property="og:description" content="Electricidad industrial, automatización y mantenimiento eléctrico. Prepara una solicitud para tu proyecto.">
+  <meta property="og:description" content="Electricidad industrial, automatización, mantenimiento, cámaras para faenas remotas y trámites eléctricos ante la SEC.">
   <title>Globalservices | Electricidad y automatización industrial</title>
   <link rel="icon" href="assets/mark.png" type="image/png">
   <link rel="preload" href="assets/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" defer></script>
+  <script type="module" src="news.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -26,6 +27,7 @@
       <nav class="site-nav" aria-label="Navegación principal">
         <a href="#servicios">Servicios</a>
         <a href="#alcance">Tu proyecto</a>
+        <a href="#noticias">Noticias</a>
       </nav>
       <a class="button button-header" href="#cotizar">Cotizar</a>
     </div>
@@ -52,7 +54,7 @@
             <p class="eyebrow">Servicios</p>
             <h2 id="services-title">Soluciones industriales</h2>
           </div>
-          <p>Encuentra el servicio que corresponde a tu proyecto, desde una instalación nueva hasta el diagnóstico de un equipo en operación.</p>
+          <p>Instalaciones, control de procesos, mantenimiento, seguridad para faenas y apoyo en trámites eléctricos.</p>
         </div>
         <div class="service-grid">
           <article class="service-card">
@@ -89,6 +91,26 @@
             <a href="#cotizar" data-service="Mantenimiento eléctrico">Cotizar mantenimiento</a>
           </article>
         </div>
+        <div class="specialty-grid">
+          <article class="service-card service-spotlight camera-service" id="camaras-remotas">
+            <h3>Cámaras para faenas remotas</h3>
+            <p>Videovigilancia para instalaciones y perímetros alejados, según las condiciones de conectividad y energía de la faena.</p>
+            <ul class="service-list">
+              <li>Cobertura de accesos, perímetros y zonas críticas</li>
+              <li>Cámaras de exterior y grabación local</li>
+              <li>Visualización remota donde exista conectividad</li>
+            </ul>
+            <a href="#cotizar" class="button button-primary" data-service="Cámaras para faenas remotas">Cotizar cámaras</a>
+          </article>
+          <article class="service-card service-spotlight sec-service" id="tramites-sec">
+            <span class="service-mark service-mark-document" aria-hidden="true"><span></span></span>
+            <h3>Regularización y trámites SEC</h3>
+            <p>Revisión de instalaciones eléctricas interiores y preparación de antecedentes para la declaración TE1, cuando corresponda.</p>
+            <p>Consulta por la intervención de un instalador autorizado SEC Clase A si tu proyecto lo requiere.</p>
+            <a href="#cotizar" class="button button-dark" data-service="Regularización y trámites SEC">Consultar trámite SEC</a>
+            <a class="sec-reference" href="https://www.sec.cl/area-instaladores/instaladores-electricos/">Consultar clases de licencia en la SEC</a>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -123,6 +145,8 @@
                   <option>Electricidad industrial</option>
                   <option>Automatización y control</option>
                   <option>Mantenimiento eléctrico</option>
+                  <option>Cámaras para faenas remotas</option>
+                  <option>Regularización y trámites SEC</option>
                   <option>Otro proyecto industrial</option>
                 </select>
               </label>
@@ -130,7 +154,8 @@
                 <input name="company" id="company" maxlength="120" autocomplete="organization" placeholder="Nombre de tu empresa">
               </label>
               <label class="full-field" for="description">Descripción del proyecto
-                <textarea name="description" id="description" rows="4" maxlength="1500" required placeholder="Describe el equipo, el trabajo que necesitas y el plazo."></textarea>
+                <textarea name="description" id="description" rows="4" maxlength="1500" required aria-describedby="project-hint"></textarea>
+                <span class="field-hint" id="project-hint">Indica el equipo, el trabajo que necesitas y el plazo.</span>
               </label>
             </div>
             <button class="button button-primary" type="submit" disabled>Generar solicitud</button>
@@ -146,6 +171,37 @@
             <p class="result-status" id="result-status" role="status"></p>
           </div>
         </div>
+      </div>
+    </section>
+    <section id="noticias" class="section news" aria-labelledby="news-title">
+      <div class="container">
+        <div class="section-intro">
+          <h2 id="news-title">Automatización en el mundo</h2>
+          <p>Noticias de robótica, IA aplicada y control industrial. Los titulares enlazan a las publicaciones originales.</p>
+        </div>
+        <aside class="industry-context" aria-label="Informe de tendencias">
+          <div>
+            <p class="eyebrow">Informe de tendencias</p>
+            <h3>Robótica industrial en 2026</h3>
+            <p>La Federación Internacional de Robótica destaca el avance de la IA, la integración entre sistemas de información y de planta, y la seguridad de los robots conectados.</p>
+          </div>
+          <a class="button button-light" href="https://ifr.org/ifr-press-releases/news/top-5-global-robotics-trends-2026">Leer el informe de la IFR <span class="sr-only">en inglés</span></a>
+        </aside>
+        <div class="news-bar">
+          <div class="news-filters" id="news-filters" role="group" aria-label="Filtrar noticias por tema" hidden>
+            <button type="button" aria-pressed="true" data-topic="">Todas</button>
+            <button type="button" aria-pressed="false" data-topic="Robótica industrial">Robótica industrial</button>
+            <button type="button" aria-pressed="false" data-topic="IA y visión artificial">IA y visión artificial</button>
+            <button type="button" aria-pressed="false" data-topic="Control y conectividad">Control y conectividad</button>
+          </div>
+          <p class="news-status" id="news-status" role="status">Consulta las publicaciones del sector.</p>
+        </div>
+        <ul class="news-grid" id="news-list" aria-label="Titulares recientes"></ul>
+        <p class="news-sources">Fuentes en inglés
+          <a href="https://www.therobotreport.com/">The Robot Report</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://roboticsandautomationnews.com/">Robotics &amp; Automation News</a>
+        </p>
       </div>
     </section>
   </main>

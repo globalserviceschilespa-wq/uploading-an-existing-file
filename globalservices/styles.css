@@ -301,6 +301,63 @@ h3 { font-size: clamp(1.65rem, 2.35vw, 2.3rem); line-height: 1; }
 }
 .service-card a:hover { color: #8d5700; }
 
+.specialty-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.service-spotlight {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.4rem, 3vw, 2.5rem);
+}
+
+.service-spotlight h3 { font-size: clamp(2rem, 3.6vw, 3rem); }
+.service-spotlight > p { max-width: 31rem; }
+
+.camera-service {
+  overflow: hidden;
+  justify-content: end;
+  background: var(--deep-navy);
+  color: white;
+}
+
+.camera-service::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(10,17,25,.96) 4%, rgba(10,17,25,.83) 45%, rgba(10,17,25,.23)),
+    linear-gradient(0deg, rgba(10,17,25,.9) 2%, rgba(10,17,25,0) 64%),
+    url("assets/camaras-faena.webp") 62% center / cover;
+}
+
+.camera-service > p { color: #e0e6ec; }
+.camera-service .service-list li::marker { color: var(--amber); }
+.camera-service :focus-visible { outline-color: var(--amber); }
+
+.service-spotlight .button {
+  padding: .73rem 1.3rem;
+  font-weight: 700;
+}
+
+.service-spotlight .button-primary { color: var(--deep-navy); margin-top: 0; }
+.service-spotlight .button-dark { color: white; margin-top: 1.2rem; }
+.service-spotlight .sec-reference { margin-top: .65rem; font-size: .94rem; }
+
+.service-mark-document > span {
+  width: 1rem;
+  height: 1.25rem;
+  border: 2px solid currentColor;
+  border-radius: .1rem;
+  background:
+    linear-gradient(currentColor, currentColor) center 34% / 60% 2px no-repeat,
+    linear-gradient(currentColor, currentColor) center 64% / 60% 2px no-repeat;
+}
+
 .approach { background: #fff; }
 .approach-layout { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 6vw, 6rem); }
 .approach-image { width: 100%; height: clamp(20rem, 38vw, 29rem); object-fit: cover; border-radius: .2rem; }
@@ -321,6 +378,7 @@ h3 { font-size: clamp(1.65rem, 2.35vw, 2.3rem); line-height: 1; }
 .full-field { grid-column: 1 / -1; }
 label { display: block; font-size: .94rem; font-weight: 700; }
 .optional { color: var(--muted); font-weight: 400; }
+.field-hint { display: block; margin-top: .45rem; color: var(--muted); font-weight: 400; }
 
 input, select, textarea {
   display: block;
@@ -375,9 +433,15 @@ textarea { resize: vertical; min-height: 6.8rem; }
       linear-gradient(90deg, rgba(9,16,24,.52), transparent);
   }
   .hero-content { padding: 5rem 0 3rem; }
-  .section-intro, .service-grid, .approach-layout, .quote-layout { grid-template-columns: minmax(0, 1fr); }
+  .section-intro, .service-grid, .specialty-grid, .approach-layout, .quote-layout { grid-template-columns: minmax(0, 1fr); }
   .service-grid { gap: .9rem; }
   .service-card { padding: 1.25rem; }
+  .camera-service { min-height: 25rem; }
+  .camera-service::before {
+    background:
+      linear-gradient(0deg, rgba(10,17,25,.98) 4%, rgba(10,17,25,.81) 62%, rgba(10,17,25,.18)),
+      url("assets/camaras-faena.webp") 70% top / cover;
+  }
   .approach-content { order: -1; }
   .approach-image { height: clamp(14rem, 63vw, 23rem); }
   .footer-content { align-items: flex-start; flex-direction: column; gap: .7rem; }
@@ -391,4 +455,64 @@ textarea { resize: vertical; min-height: 6.8rem; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
+}
+
+.news { background: #eef3f5; border-top: 1px solid var(--line); }
+.industry-context {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.6rem;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  border-left: .28rem solid #6dcc92;
+  background: white;
+}
+.industry-context h3 { margin: .25rem 0 .4rem; font-size: clamp(1.55rem, 3vw, 2rem); }
+.industry-context p:last-child { max-width: 65ch; margin: 0; }
+.industry-context .button { flex: 0 0 auto; }
+.news-bar { display: flex; justify-content: space-between; align-items: center; gap: .75rem; flex-wrap: wrap; }
+.news-filters { display: flex; flex-wrap: wrap; gap: .45rem; }
+.news-filters[hidden] { display: none; }
+.news-filters button {
+  min-height: 44px;
+  padding: .4rem .75rem;
+  border: 1px solid #bac6ce;
+  border-radius: .25rem;
+  background: white;
+  color: #20303b;
+  font: inherit;
+  font-size: .9rem;
+  cursor: pointer;
+}
+.news-filters button[aria-pressed="true"] { border-color: #1e3a31; color: white; background: #1e3a31; }
+.news-filters button:hover:not([aria-pressed="true"]) { border-color: #276645; }
+.news-status, .news-sources, .news-meta { font-size: .9rem; color: #465962; }
+.news-status { margin: 0; }
+.news-grid {
+  list-style: none;
+  margin: .9rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+}
+.news-grid:empty { display: none; }
+.news-grid li { padding: 1rem; background: #fff; border: 1px solid var(--line); }
+.news-grid h3 { margin: .55rem 0 .8rem; font: 700 1.12rem/1.35 "DM Sans", sans-serif; }
+.news-grid h3 a { text-decoration-thickness: .08em; text-underline-offset: .15em; }
+.news-grid h3 a:hover { color: #266844; }
+.news-category { margin: 0; font-size: .875rem; font-weight: 700; color: #22583b; }
+.news-meta { margin: 0; }
+.news-sources { margin: .85rem 0 0; }
+.news-sources a { margin-inline-start: .35rem; }
+
+@media (max-width: 58rem) {
+  .news-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 43rem) {
+  .industry-context { align-items: flex-start; flex-direction: column; }
+  .news-grid { grid-template-columns: minmax(0, 1fr); }
+  .site-nav { column-gap: clamp(.7rem, 4vw, 1.4rem); }
 }
