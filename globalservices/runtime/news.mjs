@@ -37,6 +37,14 @@ function decode(text) {
   });
 }
 
+function safeURL(value) {
+  try {
+    return new URL(value);
+  } catch {
+    return null;
+  }
+}
+
 export function parseFeed(xml, source, now = Date.now()) {
   if (!/<rss\b/i.test(xml)) return [];
   const entries = [];
@@ -48,7 +56,7 @@ export function parseFeed(xml, source, now = Date.now()) {
     const topic = topics.find(({ terms }) => terms.test(title));
     if (!title || title.length > 260 || !topic || irrelevant.test(title)) continue;
     if (!Number.isFinite(published) || now - published > maxArticleAge || published > now + 86400_000) continue;
-    const url = URL.parse(decode(extract(item, 'link')));
+    const url = safeURL(decode(extract(item, 'link')));
     if (!url || url.protocol !== 'https:' || url.username || url.password || url.port) continue;
     if (url.hostname.replace(/^www\./, '') !== source.host) continue;
     url.search = '';
@@ -64,19 +72,20 @@ export function parseFeed(xml, source, now = Date.now()) {
   return entries;
 }
 
-async function readFeed(source, request = fetch) {
-  const response = await request(source.url, {
-    headers: { Accept: 'application/rss+xml, application/xml, text/xml' },
-    signal: AbortSignal.timeout(4500),
-    redirect: 'error',
-    cf: { cacheEverything: true, cacheTtlByStatus: { '200-299': 900, '300-599': 0 } },
-  });
-  if (!response.ok || !response.body) throw new Error('RSS unavailable');
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder();
-  let bytes = 0;
-  let xml = '';
+async function readFeed(source, request) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 4500);
+  let reader;
   try {
+    const response = await request(source.url, {
+      headers: { Accept: 'application/rss+xml, application/xml, text/xml', 'User-Agent': 'Mozilla/5.0' },
+      signal: controller.signal,
+    });
+    if (!response.ok || !response.body) throw new Error('RSS upstream HTTP ' + response.status);
+    reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let bytes = 0;
+    let xml = '';
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
@@ -91,7 +100,8 @@ async function readFeed(source, request = fetch) {
     if (!entries.length) throw new Error('RSS has no matching recent articles');
     return entries;
   } finally {
-    reader.releaseLock();
+    clearTimeout(timeout);
+    reader?.releaseLock();
   }
 }
 
@@ -107,10 +117,15 @@ export function selectArticles(entries) {
   return articles.slice(0, 12);
 }
 
-export async function newsResponse(fallback, request = fetch) {
+export async function newsResponse(fallback, request = (...args) => fetch(...args)) {
   const results = await Promise.allSettled(sources.map(source => readFeed(source, request)));
   const successful = results.filter(result => result.status === 'fulfilled');
   const available = successful.flatMap(result => result.value);
+  results.forEach((result, index) => {
+    if (result.status === 'rejected') {
+      console.warn('RSS source unavailable', sources[index].name, result.reason?.message ?? 'Unknown error');
+    }
+  });
   const failedSources = new Set(sources.filter((_, index) => results[index].status === 'rejected').map(source => source.name));
   const backup = fallback.articles.filter(article =>
     failedSources.has(article.source) && Date.now() - Date.parse(article.date) <= maxArticleAge
@@ -120,10 +135,17 @@ export async function newsResponse(fallback, request = fetch) {
     status: successful.length === sources.length ? 'live' : successful.length ? 'partial' : 'fallback',
     articles: selectArticles([...available, ...backup]),
   };
+  const sourceStatus = results.map(result => {
+    if (result.status === 'fulfilled') return 'ok';
+    const message = String(result.reason?.message ?? '');
+    return message.match(/^RSS upstream HTTP (\d{3})$/)?.[1]
+      ?? (/no matching/.test(message) ? 'empty' : /size limit/.test(message) ? 'size-limit' : 'connection-error');
+  });
   return Response.json(data, {
     headers: {
       'Cache-Control': data.status === 'live' ? 'private, max-age=600' : 'private, max-age=120',
       'X-Content-Type-Options': 'nosniff',
+      'X-News-Source-Status': sourceStatus.join(', '),
     },
   });
 }

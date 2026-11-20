@@ -39,9 +39,13 @@ function articleItem(article) {
 
 function visibleArticles(articles) {
   return articles.filter(article => {
-    const url = URL.parse(article.url);
-    return url?.protocol === 'https:' && allowedHosts.includes(url.hostname.replace(/^www\./, ''))
-      && Number.isFinite(Date.parse(article.date)) && Date.now() - Date.parse(article.date) <= maxBackupAge;
+    try {
+      const url = new URL(article.url);
+      return url.protocol === 'https:' && allowedHosts.includes(url.hostname.replace(/^www\./, ''))
+        && Number.isFinite(Date.parse(article.date)) && Date.now() - Date.parse(article.date) <= maxBackupAge;
+    } catch {
+      return false;
+    }
   });
 }
 
